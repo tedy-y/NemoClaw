@@ -42,6 +42,7 @@ const WORKFLOW_SHA = "d".repeat(40);
 const ADVANCED_WORKFLOW_SHA = "e".repeat(40);
 const CI_RUN_ID = 99;
 const CI_RUN_ATTEMPT = 3;
+const GATE_RUN_ID = 77;
 const CORRELATION_ID = "12345678-1234-4123-8123-123456789abc";
 const BROAD_FILES = [
   "src/lib/onboard.ts",
@@ -180,6 +181,8 @@ function startCommand(workDir: string, prNumber = "42") {
     String(CI_RUN_ATTEMPT),
     "--ci-run-id",
     String(CI_RUN_ID),
+    "--gate-run-id",
+    String(GATE_RUN_ID),
     "--pr",
     prNumber,
     "--work-dir",
@@ -253,6 +256,8 @@ describe("PR E2E controller", () => {
           String(CI_RUN_ATTEMPT),
           "--ci-run-id",
           String(CI_RUN_ID),
+          "--gate-run-id",
+          String(GATE_RUN_ID),
           "--pr",
           "42",
           "--work-dir",
@@ -262,6 +267,7 @@ describe("PR E2E controller", () => {
         mode: "start",
         ciRunAttempt: CI_RUN_ATTEMPT,
         ciRunId: CI_RUN_ID,
+        gateRunId: GATE_RUN_ID,
         prNumber: 42,
         planPath: path.join(workDir, "risk-plan.json"),
         statePath: path.join(workDir, "controller-state.json"),
